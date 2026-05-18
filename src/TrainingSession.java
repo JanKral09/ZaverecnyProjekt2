@@ -30,4 +30,13 @@ public class TrainingSession {
     public int getMaxDuration() {
         return maxDuration;
     }
+
+    @Override
+    public String toString() {
+        return "TrainingSession{" +
+                "exercises=" + exercises +
+                ", maxDuration=" + maxDuration +
+                ", currentDuration=" + currentDuration +
+                '}';
+    }
 }

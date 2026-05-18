@@ -7,4 +7,13 @@ public class WarmUpExercise extends Exercise {
     public String getExerciseDetails() {
         return "Warm-up: " + name + " (" + duration + " min) - Prepare for action!";
     }
+
+    @Override
+    public String toString() {
+        return "WarmUpExercise{" +
+                "name='" + name + '\'' +
+                ", duration=" + duration +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }

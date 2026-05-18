@@ -20,4 +20,13 @@ public abstract class Exercise implements Planable {
     }
 
     public abstract String getExerciseDetails();
+
+    @Override
+    public String toString() {
+        return "Exercise{" +
+                "name='" + name + '\'' +
+                ", duration=" + duration +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }
