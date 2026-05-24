@@ -5,6 +5,6 @@ public class FitnessExercise extends Exercise {
 
     @Override
     public String getExerciseDetails() {
-        return "[Fitness] \" + name + \" (\" + duration + \" mins)";
+        return "[Fitness] " + name + " (" + duration + " min)";
     }
 }

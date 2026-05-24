@@ -5,7 +5,7 @@ public class WarmUpExercise extends Exercise {
     }
     @Override
     public String getExerciseDetails() {
-        return "Warm-up: " + name + " (" + duration + " min) - Prepare for action!";
+        return "[Warm-up] " + name + " (" + duration + " min)";
     }
 
     @Override
