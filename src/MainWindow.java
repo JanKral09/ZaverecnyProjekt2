@@ -2,28 +2,26 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    private TrainingSession session; // Instance našeho tréninku (Logika)
-    private DefaultListModel<String> listModel; // Model pro grafický seznam cvičení
-    private JLabel statusLabel; // Popisek pro zobrazení času
+    private TrainingSession session;
+    private DefaultListModel<String> listModel;
+    private JLabel statusLabel;
 
     public MainWindow() {
-        // Inicializace tréninkového plánu s maximální délkou 90 minut
         session = new TrainingSession(90);
         listModel = new DefaultListModel<>();
 
         setTitle("Football Training Planner");
         setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Křížek ukončí celou aplikaci
-        setLocationRelativeTo(null); // Vycentrování okna na obrazovce
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
 
         initUI();
-        refreshUI(); // Prvotní vykreslení textu o čase
+        refreshUI();
     }
 
     private void initUI() {
         setLayout(new BorderLayout());
 
-        // HORNÍ PANEL: Titulek a stavový řádek s časem
         JPanel northPanel = new JPanel(new GridLayout(2, 1));
         JLabel titleLabel = new JLabel("Training Session Plan", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 22));

@@ -41,7 +41,7 @@ public class AddExerciseWindow extends JFrame {
         categoryBox = new JComboBox<>(categories);
         add(categoryBox);
 
-        JButton saveButton = new JButton("Save to JSON");
+        JButton saveButton = new JButton("Save to Database");
         saveButton.addActionListener(e -> saveExercise());
         add(saveButton);
 
