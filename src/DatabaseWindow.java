@@ -32,16 +32,6 @@ public class DatabaseWindow extends JFrame {
         dbModel = new DefaultListModel<>();
         JList<Exercise> dbList = new JList<>(dbModel);
 
-        dbList.setCellRenderer(new DefaultListCellRenderer() {
-            @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                if (value instanceof Exercise) {
-                    value = ((Exercise) value).getExerciseDetails();
-                }
-                return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            }
-        });
-
         add(new JScrollPane(dbList), BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel();

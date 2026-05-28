@@ -21,7 +21,6 @@ public class Player {
         return age;
     }
 
-    // Pomocná metoda pro hezký výpis
     public String getDetails() {
         return firstName + " " + lastName + " (Age: " + age + ")";
     }

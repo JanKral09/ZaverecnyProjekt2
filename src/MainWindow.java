@@ -40,6 +40,14 @@ public class MainWindow extends JFrame {
 
         JPanel bottomPanel = new JPanel();
 
+        JButton addPlayerButton = new JButton("Add Player");
+        addPlayerButton.setFont(new Font("Arial", Font.BOLD, 14));
+        addPlayerButton.addActionListener(e -> {
+            AddPlayerWindow playerWindow = new AddPlayerWindow(this);
+            playerWindow.setVisible(true);
+        });
+        bottomPanel.add(addPlayerButton);
+
         JButton openDbButton = new JButton("Open Exercise Database");
         openDbButton.setFont(new Font("Arial", Font.BOLD, 14));
         openDbButton.addActionListener(e -> {
