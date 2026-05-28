@@ -30,6 +30,12 @@ public class TrainingSession {
     public int getMaxDuration() {
         return maxDuration;
     }
+    public void removeExercise(int index) {
+        if (index >= 0 && index < exercises.size()) {
+            Exercise removed = exercises.remove(index);
+            currentDuration -= removed.getDurationInMinutes();
+        }
+    }
 
     @Override
     public String toString() {

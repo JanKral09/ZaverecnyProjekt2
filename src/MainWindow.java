@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainWindow extends JFrame {
     private TrainingSession session;
@@ -35,6 +37,19 @@ public class MainWindow extends JFrame {
 
         JList<String> exerciseList = new JList<>(listModel);
         exerciseList.setFont(new Font("Arial", Font.PLAIN, 14));
+        exerciseList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int index = exerciseList.locationToIndex(e.getPoint());
+
+                    if (index >= 0) {
+                        session.removeExercise(index);
+                        refreshUI();
+                    }
+                }
+            }
+        });
         JScrollPane scrollPane = new JScrollPane(exerciseList);
         add(scrollPane, BorderLayout.CENTER);
 
