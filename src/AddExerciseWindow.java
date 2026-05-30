@@ -7,13 +7,19 @@ import java.util.Arrays;
 import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+/**
+ * Window with a form to create and save a completely new exercise.
+ * Saves the resulting data into the JSON database file.
+ */
 public class AddExerciseWindow extends JFrame {
     private JTextField nameField;
     private JSpinner durationSpinner;
     private JComboBox<String> categoryBox;
     private DatabaseWindow dbWindow;
-
+    /**
+     * Constructs the window for adding new exercises.
+     * @param dbWindow Reference to the database window to trigger UI updates.
+     */
     public AddExerciseWindow(DatabaseWindow dbWindow) {
         this.dbWindow = dbWindow;
 
@@ -24,7 +30,9 @@ public class AddExerciseWindow extends JFrame {
 
         initUI();
     }
-
+    /**
+     * Initializes the input form UI.
+     */
     private void initUI() {
         setLayout(new GridLayout(4, 2, 10, 10));
 
@@ -49,7 +57,9 @@ public class AddExerciseWindow extends JFrame {
         cancelButton.addActionListener(e -> dispose());
         add(cancelButton);
     }
-
+    /**
+     * Validates input, updates the JSON file, and instantly refreshes the database window.
+     */
     private void saveExercise() {
         String name = nameField.getText().trim();
         int duration = (int) durationSpinner.getValue();
@@ -91,7 +101,11 @@ public class AddExerciseWindow extends JFrame {
             JOptionPane.showMessageDialog(this, "Error saving: " + ex.getMessage(), "File Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Saves the provided list of exercises to a JSON file.
+     * @param list The updated list of ExerciseData.
+     * @throws IOException If file writing fails.
+     */
     private void saveListToJson(List<ExerciseData> list) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 

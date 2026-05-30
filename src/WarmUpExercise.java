@@ -1,3 +1,7 @@
+/**
+ * Represents a warm-up exercise.
+ * Inherits from the abstract Exercise class.
+ */
 public class WarmUpExercise extends Exercise {
 
     public WarmUpExercise(String name, int duration) {

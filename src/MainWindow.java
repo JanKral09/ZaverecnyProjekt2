@@ -2,25 +2,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * The main dashboard window for the application.
+ * Displays the current training session and the team roster.
+ */
 public class MainWindow extends JFrame {
     private TrainingSession session;
     private DefaultListModel<String> listModel;
+    private DefaultListModel<String> playerListModel;
     private JLabel statusLabel;
-
+    /**
+     * Constructs the main application window and prompts for session duration.
+     */
     public MainWindow() {
         session = new TrainingSession(90);
         listModel = new DefaultListModel<>();
 
         setTitle("Football Training Planner");
-        setSize(800, 600);
+        setSize(1000, 600);
+        playerListModel = new DefaultListModel<>();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         initUI();
         refreshUI();
+        refreshPlayers();
     }
-
+    /**
+     * Initializes the user interface components.
+     */
     private void initUI() {
         setLayout(new BorderLayout());
 
@@ -50,8 +60,25 @@ public class MainWindow extends JFrame {
                 }
             }
         });
-        JScrollPane scrollPane = new JScrollPane(exerciseList);
-        add(scrollPane, BorderLayout.CENTER);
+
+        JPanel centerPanel = new JPanel(new GridLayout(1, 2, 10, 0));
+
+        // Left Column: Training
+        JPanel leftPanel = new JPanel(new BorderLayout());
+        leftPanel.setBorder(BorderFactory.createTitledBorder("Current Training Session"));
+        leftPanel.add(new JScrollPane(exerciseList), BorderLayout.CENTER);
+        centerPanel.add(leftPanel);
+
+         // Right Column: Players
+        JPanel rightPanel = new JPanel(new BorderLayout());
+        rightPanel.setBorder(BorderFactory.createTitledBorder("Your Team / Squad"));
+        JList<String> playerList = new JList<>(playerListModel);
+        playerList.setFont(new Font("Arial", Font.PLAIN, 14));
+        rightPanel.add(new JScrollPane(playerList), BorderLayout.CENTER);
+        centerPanel.add(rightPanel);
+
+
+        add(centerPanel, BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel();
 
@@ -73,7 +100,9 @@ public class MainWindow extends JFrame {
 
         add(bottomPanel, BorderLayout.SOUTH);
     }
-
+    /**
+     * Refreshes the training list and time status label based on session data.
+     */
     public void refreshUI() {
         listModel.clear();
 
@@ -87,6 +116,22 @@ public class MainWindow extends JFrame {
             statusLabel.setForeground(Color.RED);
         } else {
             statusLabel.setForeground(Color.BLACK);
+        }
+    }
+    /**
+     * Reloads the player roster from the JSON file and refreshes the GUI list.
+     */
+    public void refreshPlayers() {
+        playerListModel.clear();
+        try {
+            Player[] loadedPlayers = AddPlayerWindow.loadPlayersFromFile("players.json");
+            if (loadedPlayers != null) {
+                for (Player p : loadedPlayers) {
+                    playerListModel.addElement(p.getDetails());
+                }
+            }
+        } catch (Exception e) {
+            playerListModel.addElement("No players found in database.");
         }
     }
 }
